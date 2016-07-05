@@ -1,21 +1,27 @@
+<?php
+
+require './classes/conexao.class.php';
+$CONEXAO = new conexao();
+$CONEXAO->conectar();
+
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
-        <title>SUBRAC</title>
-        <meta charset="UTF-8">
-        <meta name="author" content="Francisco Leal, Leandro Ewerton de Paula">
-        <meta name="description" content="">
-        <meta name="keywords" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" href="" sizes="32x32">
-        <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-        <script type="text/javascript" src="javascripts/jquery_2.1.3.min.js"></script>
-        <script type="text/javascript" src="javascripts/bootstrap.min.js"></script>
-        <script type="text/javascript" src="javascripts/javascript.js"></script>
+        <?php
+        include './head_tags.php';
+        ?>
+        <style type="text/css">
+            body {
+                background-image: url(imagens/background.png);
+                background-attachment: fixed;
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+            }
+        </style>
     </head>
     <body>
-        <nav class="navbar navbar-inverse navbar-static-top">
+        <nav class="navbar navbar-inverse navbar-static-top"> <!-- Barra de navegação principal -->
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#navbar-collapse" data-toggle="collapse" type="button">
