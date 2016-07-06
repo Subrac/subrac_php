@@ -1,23 +1,31 @@
 <?php
-class conexao {
 
-    private $SERVER = "localhost";
-    private $USER = "root";
-    private $PASSWORD = "";
-    private $BASE = "subrac";
-    private $PDO;
+class Conexao {
 
-    public function conectar() {
+    const SERVER = "localhost";
+    const BASE = "subrac";
+    const USER = "root";
+    const PASSWORD = "";
+
+    private static $INSTANCE = null;
+
+    public static function conectar() {
         try {
-            $this->PDO = new PDO("mysql:host=" . $this->SERVER . ";dbname=" . $this->BASE . "", $this->USER, $this->PASSWORD);
+            if (self::$INSTANCE == null):
+                $DSN = "mysql:host=" . self::SERVER . ";dbname=" . self::BASE . "";
+                self::$INSTANCE = new PDO($DSN, self::USER, self::PASSWORD);
+                self::$INSTANCE->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            endif;
         } catch (PDOException $ex) {
             echo $ex->getMessage();
         }
+        return self::$INSTANCE;
     }
 
-    public function desconectar() {
-        $this->PDO = null;
+    protected static function getDB() {
+        return self::conectar();
     }
 
 }
+
 ?>

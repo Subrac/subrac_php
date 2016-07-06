@@ -1,9 +1,12 @@
 <?php
-
-require './classes/conexao.class.php';
-$CONEXAO = new conexao();
-$CONEXAO->conectar();
-
+session_start();
+require_once './classes/conexao.class.php';
+require_once './classes/login.class.php';
+if (isset($_REQUEST['LOGOFF'])):
+    if ($_REQUEST['LOGOFF'] == "OK"):
+        Login::logoff();
+    endif;
+endif;
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -11,14 +14,6 @@ $CONEXAO->conectar();
         <?php
         include './head_tags.php';
         ?>
-        <style type="text/css">
-            body {
-                background-image: url(imagens/background.png);
-                background-attachment: fixed;
-                background-repeat: no-repeat;
-                background-size: 100% 100%;
-            }
-        </style>
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-static-top"> <!-- Barra de navegação principal -->
@@ -251,10 +246,17 @@ $CONEXAO->conectar();
                                 </li>
                             </ul>
                         </li>
-                        <li><a href="#" title="Sair do Sistema">Sair do Sistema</a></li>
+                        <li><a href="index.php?LOGOFF=OK" title="Sair do Sistema">Sair do Sistema</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
+        <?php
+        if (isset($_SESSION['LOGADO'])):
+            echo "<h1>BEM VINDO " . $_SESSION['NOME_COMPLETO'] . "</h1>";
+        else:
+            header("Location:login.php");
+        endif;
+        ?>
     </body>
 </html>
