@@ -7,6 +7,9 @@ if (isset($_REQUEST['LOGOFF'])):
         Login::logoff();
     endif;
 endif;
+if (!(isset($_SESSION['LOGADO']))):
+    header("Location:login.php");
+endif;
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -251,12 +254,5 @@ endif;
                 </div>
             </div>
         </nav>
-        <?php
-        if (isset($_SESSION['LOGADO'])):
-            echo "<h1>BEM VINDO " . $_SESSION['NOME_COMPLETO'] . "</h1>";
-        else:
-            header("Location:login.php");
-        endif;
-        ?>
     </body>
 </html>
